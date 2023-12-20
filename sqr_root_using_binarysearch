@@ -1,0 +1,31 @@
+//finding square root using binary search
+//NOTE for the TLE at 10^9 : 
+// used s = k+1;  e = k-1; instead of s+=1 ; e-=1;
+long long int floorSqrt(int n)
+{
+    // Write your code here.
+    long long int s = 0;
+    long long int e = n;
+    long long int k = s + (e-s)/2;
+    long long int ans = -1;
+    long long int sqr = -1;
+    
+
+    while(s<=e){  
+        sqr = k*k;
+        if(sqr== n){
+            return k;
+        }
+        else if(sqr < n){
+            ans = k;
+            s= k+1;
+            
+        }
+        else{
+            e= k -1;
+        }
+        k = s + (e-s)/2;
+        sqr = k*k;
+    }
+    return ans;
+}
