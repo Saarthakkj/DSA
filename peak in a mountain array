@@ -1,0 +1,27 @@
+//gives the peak in the mountain array
+//note: no use of "max" integer
+class Solution {
+public:
+    int peakIndexInMountainArray(vector<int>& arr) {
+        int start = 0;
+        int end = arr.size() -1;
+        int mid = start + (end - start)/2;
+        int max = -1;
+
+        while(start<=end){
+            if(arr[mid] > arr[mid+1] && arr[mid] > arr[mid-1]){
+                //found the peak 
+                return mid;
+            }
+            else if (arr[mid] > arr[mid+1]){ //in dec function
+                //go to left part
+                end = mid;
+            }
+            else if(arr[mid] < arr[mid+1]){
+                start = mid;
+            }
+            mid = start +(end - start)/2;
+        }
+        return mid;
+    }
+};
