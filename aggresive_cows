@@ -1,0 +1,43 @@
+//aggressive cows problem
+bool isPossible(vector<int> &arr, int k  , int mid){
+    int last_pos = arr[0];
+    int n_cows = 1;
+
+    for(int i = 0; i < arr.size() ; i++){
+        //cout<< "temp_dist : " << temp_dist << endl;
+        if( arr[i] - last_pos>=mid ){
+            n_cows ++;
+            if(n_cows ==k){
+                return true;
+            }
+            last_pos = arr[i];
+        } 
+    }
+    return false;
+}
+int aggressiveCows(vector<int> &stalls, int k)
+{
+    sort(stalls.begin() , stalls.end());
+    int n = stalls.size();
+    int s= 0;
+    int e = stalls[n-1];
+
+    int mid = s+(e-s)/2;
+    int ans = -1;
+
+   
+    while(s<=e){
+        //cout << "mid: " << mid << endl;
+        if(isPossible(stalls, k , mid)){
+            ans = mid;
+            s = mid+1;
+        }
+        else{
+            e = mid-1;
+        }
+
+        mid = s+ (e-s)/2;
+    }
+
+    return ans;
+}
