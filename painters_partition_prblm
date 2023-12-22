@@ -1,0 +1,55 @@
+//Painters partition problem ~ Similar to Book Allocator problem
+bool isPossible(vector<int> &arr , int n , int k , int mid){
+    
+    int painter_count =1;
+    int temp_sum = 0;
+
+
+    for(int i =0; i<n;i++){
+        // cout << "this is temp_sum" << temp_sum << endl;
+        if(temp_sum+ arr[i] <= mid){
+           
+            // cout << "this is temp b4 additon: " << temp_sum << endl;
+            temp_sum= temp_sum+ arr[i];
+            // cout << "this is arr[i]" << arr[i] << "this is temp_sum" << temp_sum << endl;
+        }
+        else{
+            painter_count++;
+            if(arr[i] > mid || painter_count > k){
+                return false;
+            }
+            temp_sum = arr[i];
+        }
+        //cout << "this is temp sum" << temp_sum << " for i : " << i << endl;
+    }
+    return true;
+}
+
+
+int findLargestMinDistance(vector<int> &boards, int k)
+{
+    int n = boards.size();
+    int s = 0;
+    int e = 0;
+    for(int i = 0; i<n ; i++){
+        e+=boards[i];
+    }
+
+    int mid = s +(e-s)/2;
+    int ans = -1;
+
+    while(s<=e){
+        //cout << "this is mid: " <<mid << endl;
+        if(isPossible(boards , n , k , mid)){
+            ans = mid;
+            e = mid-1;
+        }
+        else{
+            s = mid+1;
+        }
+
+        mid = s +(e-s)/2;
+    }
+
+    return ans;
+}
