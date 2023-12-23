@@ -1,0 +1,74 @@
+#include <bits/stdc++.h> 
+bool isPossible(vector<int> &arr, int m , int mid){
+    int d_c = m ;
+    int d_c2= 0;
+    //d_C is disch count
+    for(int i = 0 ; i<arr.size(); i++){
+
+        while(d_c){
+            //printf("hello");
+            if(d_c*(d_c+1)*arr[i]/2 <= mid){
+                d_c2 +=d_c;
+                // if(mid ==8){
+                //     printf(" mid: %d , d_c: %d, d_c2 value: %d, for the arr[i] : %d\n", mid,d_c , d_c2 , arr[i] );
+                // }
+                // if(d_c2 > m){
+                //     return false;
+                // }
+                //remaining dishes 
+                //handles by other chefs
+                break;
+                //possible soln milgya!
+            }
+            else{
+                d_c--;
+                //no dish can be assigned to that particular arr[i]
+                if(d_c ==0){
+                    return false;
+                }
+            }
+        }
+        d_c = m-d_c;
+        if(d_c==0){
+            return true;
+        }
+        //  if(arr.size() ==4){
+        //     printf("d_c value : %d for the arr[i] : %d" , d_c , arr[i]);
+        // }
+       
+    }
+    if(d_c2 < m){
+        return false;
+    }
+    else{
+        return true;
+    }
+       
+}
+int minCookTime(vector<int> &rank, int m)
+{
+    // Write your code here
+    int s= 0;
+    sort(rank.begin() , rank.end());
+    int e = (m * (m + 1) * (*std::prev(rank.end()))) / 2;
+    
+    int ans = -1;
+    int mid = s +(e-s)/2;
+    while(s<=e){
+        
+       
+        //printf("\nmid : %d\n\n" , mid);
+        if(isPossible(rank , m, mid)){
+
+            ans = mid;
+            //printf("\nans: %d\n" , ans);
+            e = mid-1;
+        }
+        else{
+            s = mid+1;
+        }
+        mid = s +(e-s)/2;
+    }
+
+    return ans;
+}
