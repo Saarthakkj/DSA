@@ -1,0 +1,26 @@
+#include <bits/stdc++.h> 
+#include <math.h>
+int* find_min(vector<int>& arr, int i , int n){
+    int min =INT_MAX ;
+    int* ptr;
+    for(int j = i ; j<n; j++){
+        if(arr[j] < min){
+            min = arr[j];
+            ptr = &arr[j];
+        }
+    }
+
+    return ptr;
+}
+void selectionSort(vector<int>& arr, int n)
+{   
+    int* temp; 
+    int temp2 = 0;
+    // Write your code here.
+    for(int i =0 ; i<n; i++){
+        temp=find_min(arr , i , n);
+        temp2 = arr[i];
+        arr[i] = *temp;
+        *temp = temp2;
+    }
+}
