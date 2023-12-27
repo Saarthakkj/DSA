@@ -1,0 +1,73 @@
+//leetcode problem
+//checkzero is tweaking the main array as we want
+//is zero determines whether the given array is in correct form or not
+//change checkzero for the implementation, iszero will be same in every implementation
+class Solution {
+public:
+    bool iszero(vector<int>& arr ){
+        bool res = false;
+        int i =0;
+        for(; i<arr.size() ; i++){
+            if(arr[i] ==0){
+                res = true;
+                break;
+            }
+        }
+        if(res == false){
+            return true;
+        }
+        for(int j = i; j< arr.size() ; j++){
+            if(arr[j] !=0){
+                return false;
+            }
+        }
+        return true;
+    };
+    void checkzero(vector<int>& nums){
+        int first_occ = -1;
+        for(int i =0; i< nums.size() ; i++){
+            if(nums[i] ==0){
+                first_occ = i;
+            }
+            else{
+                
+                //cout << "before swap : "<< endl;
+                // for(int i=0 ; i< nums.size() ; i++){
+                //     cout <<" "<< nums[i];
+                // }
+                // cout << endl;
+
+
+                if(first_occ !=-1){
+                    //cout << "first occurence  is : " << first_occ<< endl;
+                    swap(nums[first_occ] , nums[i]);
+                    first_occ = i;
+                }
+
+                //cout << "after swap : "<< endl;
+                // for(int i=0 ; i< nums.size() ; i++){
+                //     cout <<" "<< nums[i];
+                // }
+                //cout << endl;
+                //cout<< "first_occ is : " << first_occ << endl;
+                
+            }
+        }
+    }
+    void moveZeroes(vector<int>& nums) {
+        //sort(nums.begin() , nums.end());
+        while(!iszero(nums)){
+            //cout << "iszero : "<< iszero(nums) << endl;
+            // for(int i=0 ; i< nums.size() ; i++){
+            //     cout <<" "<< nums[i];
+            // }
+            checkzero(nums);
+        }
+
+       
+
+        // for(int i=0 ; i< nums.size() ; i++){
+        //         cout <<  " "<< nums[i];
+        // }
+    }
+};
