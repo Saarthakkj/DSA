@@ -13,6 +13,7 @@ void insertionSort(int n, vector<int> &arr){
                 break;
             }
         }
+        //copy temp value, (the one which is comapred to every element)
         arr[j+1] = temp;
     }
 }
