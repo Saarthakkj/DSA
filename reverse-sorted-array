@@ -1,0 +1,10 @@
+void reverseArray(vector<int> &arr , int m){
+    // Write your code here       	
+    int j = 0;
+    for(int i = m+1; i< (arr.size()+m+1)/2 ; i++)
+    {
+       // cout << "i: "<< i<< endl;
+        j = arr.size() +m-i;
+        swap(arr[i] , arr[j]);
+    }
+}
