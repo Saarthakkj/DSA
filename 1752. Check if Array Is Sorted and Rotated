@@ -1,0 +1,63 @@
+class Solution {
+public:
+    // int isRotated(vector<int>& arr){
+    //     for(int i =0; i< arr.size()-1; i++){
+    //         //printf("for arr[i+1] and arr[i]: %d %d" , arr[i]  , arr[i+1]);
+    //         //printf("this ise xecute");
+    //         if(arr[i+1] >= arr[i]){
+    //             continue;
+    //         }else{
+    //             printf("this is i+1 here: %d"  , i+1);
+    //             return i+1;
+    //         }
+    //     }
+    //     return arr.size()-1;
+    // } 
+    int isSorted(vector<int>& arr  , int index , int maxx){
+        int i = index;
+        if(i == arr.size()-1){
+            cout << "this is exectued" << i << endl;
+            if(arr[i]<= maxx){
+                return i+1;
+            }else{
+                return -1;
+            }
+        }
+        for(; i< arr.size() ; i++){
+            //cout << "this is maxx: "<< maxx << endl;
+
+            if(arr[i] <= maxx ){
+                cout << " for loop is exectued"<< endl;
+                if(i+1<= arr.size()-1 && arr[i+1] >= arr[i] && arr[i+1] <= maxx){
+                    continue; 
+                }else{
+                    return i+1;
+                }
+            }
+            else{
+                //not the right soln
+                cout << "i is here: "<< i << endl;
+                return -1;
+            }
+        }
+        return i+1;
+    }
+    bool check(vector<int>& nums) {
+        int i = isSorted(nums  , 0,INT_MAX);
+        // 
+        cout << "i is : "<< i << endl;
+        if(i == nums.size()){
+            //whole array is rotatedd
+            return true;
+        }else{
+            int minn = nums[0];
+            cout << "i is before 2nd: "<< i << endl;
+            int num = isSorted(nums, i , nums[0]);
+            cout << "num is : "<< num << endl;
+            if(num == nums.size()){
+                return true;
+            }
+        }
+        return false;
+    }
+};
