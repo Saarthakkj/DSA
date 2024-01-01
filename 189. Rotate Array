@@ -1,0 +1,57 @@
+class Solution {
+public:
+    void rotating(vector<int>& nums , int k ){
+        std::vector<int > arr(k);
+        //cout << "arr size" << nums.size() << endl;
+        for(int i =0 ; i< k ; i++){
+            arr.insert(arr.begin()+i ,nums.back()  );
+            //cout << "nums back  : "<< nums.back()<< endl;
+            nums.pop_back();
+        }
+        //arr.push_back(nums.back());
+        // for (auto itr = arr.begin() ; itr < arr.end() ; itr++){
+        //     cout << " " << *itr ;
+        // }
+
+        
+        for( int i =0;  i <k ; i++){
+            // cout << "arr.at(i)" << arr.at(i) << endl;
+            nums.insert(nums.begin(), arr.at(i));
+        }
+    }
+    void rotate(vector<int>& nums, int k) {
+        //used ai to generate a logic to help with tle:
+        int n = nums.size();
+        k = k % n; 
+        // Handle cases where k is greater than the size of the array
+
+        if (k > 0) {
+            // Reverse the entire array
+            reverse(nums.begin(), nums.end());
+
+            // Reverse the first k elements
+            reverse(nums.begin(), nums.begin() + k);
+
+            // Reverse the rest of the elements
+            reverse(nums.begin() + k, nums.end());
+        }
+
+        //inefficient logic : (by me : )
+        // if(k>nums.size()){
+        //     int sz = nums.size();
+        //     while(k-sz>0)
+        //     {
+        //         rotating(nums, nums.size());
+        //         k-=nums.size();
+        //     }
+        //     if(k>0){
+        //         //cout << " k is : " << k << endl;
+        //         rotating(nums , k);
+        //     }
+           
+        // }else{
+        //     rotating(nums , k);
+        // }
+        
+    }
+};
