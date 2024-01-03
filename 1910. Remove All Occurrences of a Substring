@@ -1,0 +1,25 @@
+class Solution {
+public:
+    bool checkPart(int i , string p,  string s){
+        int j =0;
+        while(j<p.size()){
+            if(!(s[i+j] == p[j])){
+                return false;
+            }
+            j++;
+        }
+        return true;
+    }
+    string removeOccurrences(string s, string part) { 
+        for(int i=0; i<s.size() ; i++){
+            if( s[i] ==part[0]){
+                if(checkPart( i , part , s)){
+                    //can make a new string here:
+                    s.erase(i , part.size());
+                    i=-1;
+                }
+            }
+        }
+        return s;
+    } ;
+};
