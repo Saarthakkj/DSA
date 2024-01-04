@@ -1,0 +1,112 @@
+//no use of iterator or visited array
+//just while-loop call of the function
+//TODO: use recursion for this problem and add the code here
+class Solution {
+public:
+    vector<int> ans ;
+
+    bool done = false;
+    int count = 0;
+    //vector<pair<int, int>> visited[100] ;
+    void recursiveCall(vector<vector<int>>& arr, int row, int col , int s_row , int s_col ){
+        int total_elem = arr.size()*arr[0].size() ;
+       // vector<int>::iterator it;
+        for(int j =s_col; j<col; j++){
+            // if(!binarySearch(visited, size , arr[s_row][j])){
+            // //if(true){
+            //     //first row:
+            //     ans.push_back(arr[s_row][j]);
+            //     visited[in] = arr[s_row][j];
+            //     in++;
+            // }
+            // it = find(ans.begin(), 
+            // ans.end(), arr[s_row][j]);
+            // if(it==ans.end()){
+            ans.push_back(arr[s_row][j]);
+            count++;
+            if(count>= total_elem ){
+                done = true;
+                return ;
+            }
+            //}
+        }
+        for(int i = s_row+1 ; i<row; i++ ){
+            //cout<<"row is : " << row << "i is: "<< i <<" col : "<< col <<endl;
+            // if(!binarySearch(visited, size , arr[i][col-1]) ){
+            //     //last col of the matrix:
+            //     cout<< "i is: "<< i <<" col : "<< col <<endl;
+            //     ans.push_back(arr[i][col-1]);
+            //     visited[in] =arr[i][col-1];
+            //     in++;
+            // }
+            // it = find(ans.begin(), 
+            // ans.end(), arr[i][col-1]);
+            // if(it==ans.end()){
+            ans.push_back(arr[i][col-1]);
+            count++;
+            if(count>= total_elem ){
+                done = true;
+                return ;
+            }
+            //}
+        }
+        for(int j =col-2; j>=s_col; j--){
+            // if(!binarySearch(visited, size , arr[row-1][j])){
+            //     //last row:
+            //     ans.push_back(arr[row-1][j]);
+            //     visited[in] = arr[row-1][j];
+            //     in++;
+            // }
+            // it = find(ans.begin(), 
+            // ans.end(), arr[row-1][j]);
+            // if(it==ans.end()){
+            ans.push_back(arr[row-1][j]);
+            count ++;
+            if(count>= total_elem ){
+                done = true;
+                return ;
+            }
+            //}
+        }
+        for(int i = row-2 ; i>=s_row+1 ;i-- ){
+            // if(binarySearch(visited, size , arr[i][s_col])){
+            //     //first col of the matrix:
+            //     ans.push_back(arr[i][s_col]);
+            //     visited[in] =arr[i][s_col];
+            //     in++;
+            // }
+            // it = find(ans.begin(), 
+            // ans.end(), arr[i][s_col]);
+            // if(it==ans.end()){
+            ans.push_back(arr[i][s_col]);
+            count++;
+            if(count>= total_elem ){
+                done = true;
+                return ;
+            }
+            //}
+            
+        }
+        //CALL WITH ROW = N_ROW-1 AND COL = N_COL-1
+    }
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        int row =matrix.size();
+        int col = matrix[0].size();
+        int s_row =0;
+        int s_col = 0;
+        
+        while( s_row<=row && s_col <=col){
+            //cout<<"executed"<< endl;
+            recursiveCall( matrix , row , col , s_row , s_col);
+            if(done){
+                cout<<"hello"<< endl;
+                break;
+            }
+            s_row++;
+            s_col++;
+            row--;
+            col--;   
+        }
+        return ans;
+    }
+};
