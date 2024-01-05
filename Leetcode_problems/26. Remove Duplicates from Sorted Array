@@ -1,0 +1,53 @@
+//notice hthe differences in both the codes
+//notice how as array was given sorted, ! can be used instead of >
+
+//effective soln: 
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int i ;
+        int j = 1;
+        for(i = 1 ; i<nums.size(); i++ ){
+            if(nums[i] != nums[i-1])
+            {
+                nums[j] = nums[i];
+                j++;
+            }
+        }
+        return j;
+    }
+};
+
+//ineffective soln: 
+class Solution {
+// public:
+//     int removeDuplicates(vector<int>& nums) {
+//         int max = nums[0] ;
+//         vector<int>::iterator it = nums.begin();
+
+//         int count = 1;
+//         for(int i = 0; i<nums.size()-1 ; i++){
+//             //for counting the no. of elements
+//             if(nums[i+1] > max){
+//                 //cout<<"count is updated";
+//                 max = nums[i+1];
+//                 count ++;
+//             }
+
+//             //for removing the redundant numbers: 
+//             if(nums[i] == nums[i+1]){
+//                 //cout<<*(it + i);
+//                 nums.erase(it +i);
+//                 i--;
+//             };
+            
+//         }
+//         // vector<int>::iterator found = find(nums.begin()+1 , nums.end() , 0);
+//         // for(auto it = nums.begin() ; found!=nums.end() ; it++ ){
+//         //     nums.erase(it);
+//         // }
+        
+//         //cout<< "count is : "<< count;
+//         return count;
+//     }
+// };
