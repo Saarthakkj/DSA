@@ -1,0 +1,34 @@
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        //runtime beats 78.5% , storage ~7%
+        //runtime efficient: 
+
+        vector<int> arr(nums.size() +1, 0);
+        //cout<< arr.size();
+        for(int i =0 ; i<nums.size() ; i++){
+            arr[nums[i]] = 1;
+            //cout<<nums[i];
+        }
+        ;
+        // for(int j = 0; j<arr.size() ; j++){
+        //     cout<< arr[j]<< endl;
+        // }
+        int ans =  find(arr.begin() , arr.end() , 0) - arr.begin();
+        return ans;
+
+
+        //runtime beats ~20% but storage ~96%
+        //storage efficient: 
+        
+        //sort(nums.begin() , nums.end());
+        // int i ;
+        // for( i = 0 ; i<nums.size() ; i++){
+        //     if(nums[i] != i){
+        //         //return i;
+        //     }
+        // }
+        // //edge case where no. is in last position:
+        // return i;
+    }
+};
