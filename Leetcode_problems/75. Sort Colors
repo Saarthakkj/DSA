@@ -1,0 +1,40 @@
+//first calculated the freq of each element in another vector then used that to change the nums array
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+       //beats 100% soln:
+        vector<int> arr(3 , 0);
+        for(int i =0 ; i <nums.size() ; i++){
+            if(nums[i] ==0){
+                arr[0]+=1;
+            }
+            else if(nums[i] ==1){
+                arr[1]+=1;
+            }
+            else{
+                arr[2]+=1;
+            }
+        }
+        //cout<< "out of the for looop";
+        int freq = nums.size() ;
+        int freq_0 = arr[0];
+        int freq_1 = arr[1];
+        int i = 0;
+        while(freq>0){
+            if(arr[0]!=0){
+                nums[i]= 0 ;
+                arr[0]--;
+            }else if(arr[1]!=0){
+                nums[i]= 1 ;
+                arr[1]--;
+            }
+            else{
+                nums[i]= 2 ;
+                arr[2]--;
+            }
+            i++;
+            freq--;
+        }
+
+    }
+};
