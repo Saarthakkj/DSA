@@ -1,0 +1,31 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        //beats ~20% in runtime and ~80% in storage: 
+        // //can we deal with +ve and -ve targets separately?
+        // //then we have also to consider the target ==0 case separately .
+        // for (int i =0 ; i<nums.size() ; i++){
+        //     //for time optimisation:
+        //     for(int j = i+1 ; j<nums.size() ; j++){
+        //         if(nums[i]+nums[j] == target){
+        //             return {i , j};
+        //         }
+        //     }
+        // }
+        // return {};
+
+
+        //beats 80% in runtime and 17% in storage
+        //use of MAPS: 
+        map<int, int> mp;
+        for(int i = 0; i, nums.size() ; i++){
+            int req = target - nums[i];
+            if(mp.find(req) != mp.end()){
+                return {i , mp[req]};
+            }
+            mp[nums[i]] = i;
+        }
+
+        return {};
+    }
+};
