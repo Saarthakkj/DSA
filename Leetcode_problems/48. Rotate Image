@@ -1,0 +1,109 @@
+class Solution {
+public:
+    int total_elem = 0;
+    void rotate_array(vector<int>& arr , int n ){
+        int  k = n;
+        //cout<< " n here is : " << n ;
+        k = k%arr.size() ;
+        if(k>0){
+            reverse(arr.begin() , arr.end());
+            reverse (arr.begin()  , arr.begin() +k);
+            reverse(arr.begin() + k , arr.end());
+        }
+        
+    }
+    void rotate_matrix(vector<vector<int>>& matrix, int k){
+        int n = matrix.size();
+
+        int max_size = 4*(k-1);
+        int size = 0;
+        vector<int> arr(max_size);
+
+        //map can't do here: 
+        //multimap<int , int> mpp;
+        
+        //array of pairs will do:
+        vector<pair<int , int>> mpp(max_size);
+        
+        int diff =  n-k;
+        diff = diff/2;
+
+        //why diff/2 ? as 5x5 ->3x3 -> 1x1 . you understand?
+        int start_row = diff;
+        //cout<< "start_row: "<< start_row << "n and k is: " << n << k << endl;
+
+        int end_row = n-diff;
+        int start_col =diff;
+        int end_col = n-diff;
+
+        int in = 0;
+        //cout<< "reached till here";
+        for(int i = start_col ; (i< end_col&& size <max_size); i++){
+            //printing the first row
+            arr[in] = matrix[start_row][i];
+            mpp[in] = (make_pair(start_row , i));
+            //cout<< "pair : " << start_row << i<< endl;
+            in++;
+            size++;
+        }
+        for(int i = start_row+1 ; (i< end_row && size< max_size); i++){
+            //printing the last col
+            arr[in] = matrix[i][end_col-1];
+            mpp[in] = make_pair(i , end_col-1);
+            //cout<< " pair: " << i << end_col-1<< endl;
+            in++;
+            size++;
+        }
+        for(int i = end_col-2;( i>= start_col && size< max_size) ; i--){
+            //printing the last row
+            arr[in] = matrix[end_row-1][i];
+            mpp[in] = make_pair(end_row-1 , i);
+            //cout<< "pair : "<< end_row << i<< endl;
+            in++;
+            size++;
+        }
+        for(int i = end_row-2; (i >= start_row+1 && size< max_size); i--){
+            //printing the first col
+            arr[in] = matrix[i][start_col];
+            mpp[in] = make_pair(i , start_col);
+            //cout<< "pair : "<< i << start_col<< endl;
+            in++;
+            size++;
+        }
+
+        
+
+        //division by zero not possible
+        if(k>1){
+            rotate_array(arr , k-1);
+        }
+        
+
+        int ind =0;
+
+        for(auto it = arr.begin() ; it!= arr.end() ; ++it){
+            cout<< *it << endl;
+        }
+        
+        for(auto it= mpp.begin() ; it!= mpp.end() ; ++it )
+        {
+            int i =  it->first;
+            int j = it->second;
+            //cout<< i << " " << j << "arr[ind]: "<< arr[ind]<<  endl;
+            matrix[i][j]= arr[ind];
+            ind++;
+        }
+    }
+    void rotate(vector<vector<int>>& matrix) {
+        int n = matrix.size();
+
+        //rotate_matrix(matrix , n);
+        int num_loops = (n+2)/2;
+        while(num_loops>0 && n>1){
+            //cout<< "executed: " << n << endl; 
+            rotate_matrix(matrix , n);
+            n-=2;
+            num_loops--;
+        }
+    }
+};
