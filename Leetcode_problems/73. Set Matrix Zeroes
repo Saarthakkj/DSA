@@ -1,0 +1,36 @@
+class Solution {
+public:
+    void makeZeroes(pair<const int, int>& it , vector<vector<int>>& matrix){
+        int  i = it.first;
+        //i is row
+        int j = it.second;
+        //j is col
+
+        for(int i1 =0 ; i1<matrix[0].size() ; i1++){
+            //making the ith row zero
+            matrix[i][i1] = 0;
+        }
+        for(int j1 =0 ; j1<matrix.size(); j1++){
+            //making the jth col zero
+            matrix[j1][j] = 0;
+        }
+    }
+    void setZeroes(vector<vector<int>>& matrix) {
+        //WRONG DATA TYPE USED!
+        //map<int, int> mpp ;
+        multimap<int , int> mpp;
+        for(int i = 0 ; i< matrix.size() ; i++){
+            for(int j =0 ; j<matrix[0].size() ; j++){
+                if(matrix[i][j] ==0){
+                    mpp.insert(make_pair(i, j));
+                    //cout<< " i and j : "<< i << j << endl;
+                }
+            }
+        }
+        for (auto it = mpp.begin(); it !=mpp.end(); it++) {
+            //cout << "multimap: {" << it->first << "," << it->second << "}" << endl;
+            makeZeroes(*it, matrix);
+        }
+        
+    }
+};
