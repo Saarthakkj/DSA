@@ -1,0 +1,55 @@
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        int that_i =0 ;
+        
+        // for(auto it = nums.begin() ; it !=nums.end() ; ++it){
+        //     cout<< *it << " ";
+        // }
+
+        for(int i =0 ; i<nums.size()-1 ; i++){
+            //cout<< ""
+            if(nums[i] < nums[i+1]){
+                that_i = i+1;
+                
+            } 
+        }
+
+        if(that_i !=0 && that_i!= nums.size()-1){
+            //cout<< "that_i "<< that_i<< endl;
+            int lead_i = that_i;
+            for(int j = that_i+1; j<nums.size(); j++ ){
+                //cout<<"entered the second loop " << endl;
+
+                //just find the lead: 
+                if(nums[j] >nums[that_i -1] && nums[j] < nums[lead_i]){
+                    //finding the min greater element than arr[that_i-1] for taking the lead
+                    lead_i = j;
+                }
+            }
+
+            //cout<< "lead_i : "<< lead_i << endl;
+            //whole that_i+1 to size-1 array is reverse-sorted
+            //that means replace arr[that_i-1] with arr[lead_i] and then sort the rest trailing array
+
+            //cout<< "that_i +1" << that_i+1<< endl;
+            swap(nums[that_i-1] , nums[lead_i]);
+
+            //sort the element from that_i to end:
+            sort(nums.begin() + that_i ,  nums.end());
+                //the next permutation requires to take the lead and to sort the rest element.
+            //cout<< "executed 2";
+        }   
+        else if(that_i !=0){
+            //cout<< "executed 1";
+            swap(nums[that_i] , nums[that_i-1]);
+        }
+        else{
+            //cout<< "executed";
+            // for(auto it = nums.begin() ; it!= nums.end() ; ++it){
+            //     cout<< *it << endl;
+            // }
+            sort(nums.begin() , nums.end());
+        }
+    }
+};
