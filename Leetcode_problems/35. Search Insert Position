@@ -1,0 +1,41 @@
+class Solution {
+public:
+    int searchInsert(vector<int>& arr, int target) {
+        int s = 0;
+        int e = arr.size()-1;
+        int mid = e + (s-e)/2;
+
+        int in = 0;
+
+        while(s<=e){
+            if(arr[mid] == target){
+                return mid;
+            }
+            else if(arr[mid] > target){
+                //cout<< "else if mid: "<< mid;
+                e = mid-1;
+                in = mid;
+                
+                //why in = mid here? cuz "target" is inserted in order so
+                //even if a higher element is present is at "in" aslong as it's the
+                //least-largest-element in the array, it's fine.
+
+
+                
+            }
+            else{
+                //cout<< "else mid: "<< mid;
+                s = mid+1;
+                in = mid+1;
+                //the in can be outofbound here 
+                // if(mid+1 < arr.size()){
+                //     in = mid+1;
+                // }
+            }
+
+            mid = e +(s-e)/2;
+        }
+
+        return in;
+    }
+};
