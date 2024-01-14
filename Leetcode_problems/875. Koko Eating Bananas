@@ -1,0 +1,49 @@
+class Solution {
+public:
+    bool isPossible(vector<int>& arr , int mid , int hr){
+        int h = hr;
+        int i =0;
+
+        //for loop
+        for(auto it = arr.begin() ; it!= arr.end() ; ++it){
+            if((*it) <= mid){
+                h--;
+            }else{
+                h =  h - ((*it)/mid);
+                if((*it)%mid !=0){
+                   // cout<< " here h is: " << h<< endl;
+                    h--;
+                }
+            }
+        }
+        //cout<< " h is : "<< h << endl;
+        if(h>=0){
+            return true;
+        }
+        return false;
+
+
+    }
+    int minEatingSpeed(vector<int>& arr, int h) {
+        if(arr.size() == h){
+            return (*max_element(arr.begin() , arr.end()));
+        }
+        else{
+            int s = 1;
+            int e = *max_element(arr.begin() , arr.end());
+            int mid = s +(e-s)/2;
+            while(s<=e){
+                //cout<< "mid is : "<< mid << endl;
+                if(isPossible(arr , mid , h)){
+                    //cout<< "true at :" << mid<< endl;
+                    e = mid-1;
+                    //cout<< "s is : "<< s << " e is : "<< e << endl;
+                }else{
+                    s = mid+1;
+                }
+                mid = s +(e-s)/2;
+            }
+            return mid;
+        }
+    }
+};
