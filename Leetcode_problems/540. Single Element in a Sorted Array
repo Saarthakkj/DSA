@@ -1,0 +1,27 @@
+while(s<=e){
+            cout<< "arr[mid] is : " << arr[mid] <<  "mid is : "<< mid << endl;
+            if(mid%2 ==1){
+                if(arr[mid] == arr[mid-1]){
+                    //go to right part;
+                    s = mid+1;
+                }else if(arr[mid] == arr[mid+1]){
+                    //go to left part:
+                    e = mid-1;
+                }
+                else if(arr[mid]!= arr[mid+1] and arr[mid] != arr[mid-1]){
+                    return arr[mid];
+                }
+            }else{
+                if(arr[mid] == arr[mid+1]){
+                    //go to right part;
+                    s = mid+1;
+                }else if(arr[mid] == arr[mid-1]){
+                    //go to left part:
+                    e = mid-1;
+                }
+                else if(arr[mid]!= arr[mid+1] and arr[mid] != arr[mid-1]){
+                    return arr[mid];
+                }
+            }
+            mid = s +(e-s)/2;   
+        }
