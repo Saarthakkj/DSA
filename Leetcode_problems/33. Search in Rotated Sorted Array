@@ -1,0 +1,59 @@
+class Solution {
+public:
+    int binarysearch(vector<int>& arr , int s , int e  , int target){
+        int mid =s + (e-s)/2;
+        //cout<< "s is : "<< s << " e is : "<< e << " mid is : "<< mid <<  endl;
+        while(s<=e){
+            //cout<< "mid is : "<< mid<< endl;
+            if(arr[mid] == target){
+                return mid;
+            }
+            else if(arr[mid] > target){
+                e = mid-1;
+            }else{
+                s = mid+1;
+            }
+            mid =s + (e-s)/2;
+        }
+
+        return -1;
+    }
+    int search(vector<int>& arr, int target) {
+        int s = 0;
+        int e = arr.size()-1;
+        int mid = e + (s-e)/2;
+
+        //find the pivot: 
+        int pivot_in = 0;
+        //if two lines are present or not
+        if(arr[0] > arr[arr.size()-1]){
+            while(s<=e){
+                if(arr[mid] >= arr[0]){
+                    //in the first line
+                    s = mid;
+                }
+                else if(arr[mid] < arr[mid-1]){
+                    //mid is the pivot index
+                    pivot_in = mid;
+                    break;
+                }else{
+                    //in the second line :
+                    e = mid-1;
+                }
+
+                mid = e + (s-e)/2;
+            }
+        }
+        //cout<< "pivot_in" << pivot_in << endl;
+
+        //found the pivot, now apply binarySearch in each of the array separately
+        int first = binarysearch( arr , 0 , pivot_in , target);
+        //cout<< "first completed"<< endl;
+        int second = binarysearch( arr , pivot_in , arr.size()-1 , target);
+
+        // if(first == second && first == -1){
+        //     return -1;
+        // }
+        return max(first , second);
+    }
+};
