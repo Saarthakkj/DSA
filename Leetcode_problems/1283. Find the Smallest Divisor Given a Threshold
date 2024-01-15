@@ -1,0 +1,49 @@
+class Solution {
+public:
+    bool isPossible(vector<int>& arr , int mid , int thr){
+        int temp = 0;
+        for(auto it = arr.begin() ; it!= arr.end() ; ++it){
+            if((*it)%mid !=0){
+                temp+= ((*it)/mid +1);
+
+            }else{
+                temp+= (*it)/mid;
+            }
+        }
+        if(temp > thr){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+    int smallestDivisor(vector<int>& arr, int threshold) {
+        int s = 0;
+        int e = (*max_element(arr.begin() , arr.end()));
+        int mid = s + (e-s)/2;
+        int ans = 0;
+
+        while(s<=e){
+            cout<< "s " << s << " e is: "<< e << " mid is : "<< mid << endl;
+
+            //how to operate even if mid ==0
+            if(mid ==0){
+                s= mid+1;
+                mid = s + (e-s)/2;
+            }
+            if(isPossible(arr , mid , threshold) and mid!=0){
+                //this is important:
+                ans = mid;
+                //(to store ans in mid) as mid is updated after this also.
+                cout<< "mid true at: "<< mid << endl;
+                e = mid-1;
+            }else{
+                s = mid+1;
+            } 
+            mid = s + (e-s)/2;
+            
+        }
+
+        return ans;
+    }
+};
