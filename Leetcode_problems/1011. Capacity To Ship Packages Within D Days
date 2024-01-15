@@ -1,0 +1,44 @@
+class Solution {
+public:
+    bool isPossible(vector<int>& arr , int mid , int days){
+        int temp = 0; 
+        int d = days-1;
+        for(auto it = arr.begin() ; it != arr.end() ; ++it){
+            //cout<< "arr[i] : "<< (*it)<< endl;
+            if((*it) > mid){
+                return false;
+            }
+            if(temp+ (*it) <= mid){
+                temp+= (*it);
+                //cout<< "temp: "<< temp<< endl;
+            }else{
+                //cout<< "temp here: "<< temp<< endl;
+                temp = (*it);
+                d--;
+                //cout<< "d is: "<< d<< endl;
+            }
+        }
+        if(d<0){
+            return false;
+        }
+        return true;
+    }
+    int shipWithinDays(vector<int>& arr, int days) {
+        int s = (*min_element(arr.begin() , arr.end()));
+        int e = accumulate(arr.begin() , arr.end() , 0);
+        int mid = s + (e-s)/2;
+        while(s<=e){
+            //cout<< " mid here: "<< mid << endl;
+            if(isPossible(arr, mid,  days)){
+                //cout<< "mid passed: "<< mid << endl;
+                e = mid-1;
+            }else{
+                s = mid+1;
+            }
+            mid = s+ (e-s)/2;
+        }
+
+        return mid;
+    }
+    
+};
