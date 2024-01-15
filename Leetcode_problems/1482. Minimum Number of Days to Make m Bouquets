@@ -1,0 +1,61 @@
+class Solution {
+public:
+    bool isPossible(vector<int>& arr1 , int mid , int k , int m ){
+        vector<int> arr(arr1.begin() , arr1.end());
+        for(int i = 0 ; i<arr.size() ; i++){
+            arr[i]-= mid;
+        }
+        int temp = 0; //no. of adjacent flowers
+        int count = 0 ; //no. of bouqets
+        for(int i = 0 ; i< arr.size() ; i++){
+            //cout<< "arr[i]: " << arr[i]<< endl;
+            if(arr[i] <= 0){
+                temp+=1;
+                if(temp ==k){
+                    //count only if temp ==k, so no need to check for 
+                    //arr[i]>0 -> and then temp<k. 
+                    count ++;
+                    temp =0;
+                }
+            }
+            else{
+                temp =0;
+            }
+        }
+        //cout<< "count : "<< count << endl;
+        //cout<< "count is : "<< count << endl;
+        if(count <m){
+            //can't make m bouqets
+            return false;
+        }else{
+            return true;
+        }
+    }
+    int minDays(vector<int>& arr, long m, long k) {
+        int s = 0;
+        int e = (*max_element(arr.begin() , arr.end()));
+        int mid = s + (e-s)/2;
+
+        //handling the trivial case
+        long long total = m*k;
+        if(total > arr.size()){
+            return -1;
+        }
+
+        int ans = -1;
+
+        while(s<=e){
+            //cout<< "mid here is : "<< mid << endl;
+            if(isPossible(arr, mid  , k ,m)){
+                //cout<< "mid passed : "<< mid << endl;
+                ans = mid;
+                e = mid-1;
+            }else{
+                s = mid+1;
+            } 
+            mid = s + (e-s)/2;
+        }
+
+        return ans;
+    }
+};
