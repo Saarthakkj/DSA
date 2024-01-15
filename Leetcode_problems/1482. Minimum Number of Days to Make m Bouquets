@@ -1,15 +1,16 @@
+//didn't need for using the loop separately. can do it in the if-condition only.
 class Solution {
 public:
     bool isPossible(vector<int>& arr1 , int mid , int k , int m ){
         vector<int> arr(arr1.begin() , arr1.end());
-        for(int i = 0 ; i<arr.size() ; i++){
-            arr[i]-= mid;
-        }
+        // for(int i = 0 ; i<arr.size() ; i++){
+        //     arr[i]-= mid;
+        // }
         int temp = 0; //no. of adjacent flowers
         int count = 0 ; //no. of bouqets
         for(int i = 0 ; i< arr.size() ; i++){
             //cout<< "arr[i]: " << arr[i]<< endl;
-            if(arr[i] <= 0){
+            if(arr[i]-mid <= 0){
                 temp+=1;
                 if(temp ==k){
                     //count only if temp ==k, so no need to check for 
