@@ -1,0 +1,22 @@
+//found the maximum element in the matrix 
+class Solution {
+public:
+    vector<int> findPeakGrid(vector<vector<int>>& arr) {
+        vector<int> max(2 , 0);
+        int max_value = 0;
+
+        for(int i = 0; i< arr.size() ; i++){
+            //int temp_max = 0;
+            for(int j =0 ; j< arr[0].size(); j++){
+                if(arr[i][j] >  max_value){
+                    max_value = arr[i][j];
+                    max[0] = i;
+                    max[1] = j;
+                }
+            }
+        }
+
+
+        return max;
+    }
+};
