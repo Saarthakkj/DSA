@@ -1,0 +1,36 @@
+class Solution {
+public:
+    string removeOuterParentheses(string s) {
+        int open = 1;
+        int close = 0;
+        s.erase(s.begin());
+        for(auto it = s.begin() ; it!= s.end();){
+            // if(open == close){
+            //     s.erase(it);
+            // }
+            if( (*it) == '('){
+                open++;
+                ++it;
+            }
+            else{
+                close++;
+                if(open == close){
+                    //cout<< "about to get erased: "<< (*it) << endl;
+                    s.erase(it);
+                    close = 0;
+                    //open = 1;
+                    if(it != s.end())
+                    {
+                        //cout<< "about to get erased2: "<< (*it) << endl;
+                        s.erase(it);
+                        //deleting the next opening also
+                        open = 1;
+                    }
+                }else{
+                    ++it;
+                }
+            }
+        }
+        return s;
+    }
+};
