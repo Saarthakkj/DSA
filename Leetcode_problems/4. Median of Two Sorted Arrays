@@ -1,0 +1,31 @@
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        int size = nums1.size() + nums2.size() ;
+        vector<int> arr(size,0);
+        copy(nums1.begin() , nums1.end() , arr.begin());
+        copy(nums2.begin() ,  nums2.end(), arr.begin() + nums1.size());
+
+        // for(auto it = arr.begin() ; it!= arr.end() ; ++it){
+        //     cout<<(*it)<< " ";
+        // }
+
+        sort(arr.begin() , arr.end());
+        //successfully merged the two arrays
+        //cout<< "here is";
+        //cout<<"size is : " << size;
+        if(size%2 ==0){
+            //cout<< "arr[size/2] " << arr[size/2] << " arr[size/2 -1 ] "<< arr[size/2 -1];
+            float f1 = arr[size/2];
+            float f2 = arr[size/2 -1];
+
+            return (f1 + f2)/2;
+        }else{
+            //cout<< "here";
+            return arr[size/2];
+        }
+
+
+        return 0.0;
+    }
+};
