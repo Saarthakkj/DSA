@@ -1,0 +1,50 @@
+class Solution {
+public:
+    string reverseWords(string s) {
+        bool flag = false;
+        string s1;
+        stack<int> q;
+        for(int i =s.size()-1 ; i>= 0 ; i--)
+        {
+            //cout<< "s[i] is: "<< s[i] << endl;
+            if(s[i] != ' ')
+            {
+                q.push(s[i]);
+                //cout<< "s[i] is : "<< s[i]<< endl;
+            }
+            else
+            {
+                while(!q.empty())
+                {
+                    s1.push_back(q.top());
+                    q.pop();
+                    flag = true;
+                }
+                //cout<< "i is: " << i <<endl;
+                if((*(s1.end()-1)) != ' ' and flag){
+                   // cout<< "exectued"<< endl ;
+                    s1.push_back(' ');  
+                    flag = false;
+                }               
+            }
+        }
+    
+       // cout<< " out of the loop";
+        if(q.empty()){
+            //if by chance at the end space is there
+            if((*(s1.end()-1)) == ' '){
+                s1.erase(s1.end()-1);
+            }
+        }else{
+            while(!q.empty())
+            {
+                s1.push_back(q.top());
+                q.pop();
+            }
+        }
+        //for last word: 
+        
+        //no space for the last element in the answer string
+        return s1;
+    }
+};
