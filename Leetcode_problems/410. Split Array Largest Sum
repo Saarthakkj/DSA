@@ -1,0 +1,63 @@
+class Solution {
+public:
+    bool isPossible(vector<int>& arr , int mid, int k){
+        int temp_sum = 0;
+        int i = 0;
+        for(; i < arr.size() ; i++){
+            if(arr[i] > mid)
+            {
+                return false;
+            }
+            temp_sum += arr[i];
+            //cout<< "temp_sum is : "<< temp_sum << endl;
+            if(temp_sum < mid){
+                continue;
+            }
+            else if (temp_sum >mid)
+            {
+                //temp_sum > mid
+                k--;
+                //cout<< "i is : "<< i << endl;
+                temp_sum= arr[i];
+                if(k==0){
+                    return false;
+                }
+                //temp_sum !=0 and k =0 , defn return false;
+            }
+            else{
+                //temp_sum == mid
+                temp_sum = 0;
+                k--;
+                if(k==0){
+                    break;
+                }  
+            }
+        }
+
+        if(i == arr.size() or i== arr.size()-1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    int splitArray(vector<int>& arr, int k) {
+       int s = 0;
+       int e = accumulate(arr.begin(), arr.end() , 0);
+       int mid = s + (e-s)/2;
+       int ans =0;
+       while(s<=e){
+           //cout<< "mid is : "<< mid << endl;
+            if(isPossible(arr, mid , k)){
+                //cout<<  "mid passed is : "<< mid << endl;
+                ans = mid;
+                e= mid-1;
+            }
+            else{
+                s = mid+1;
+            }
+            mid = s + (e-s)/2;
+       }
+
+       return ans;
+    }
+};
