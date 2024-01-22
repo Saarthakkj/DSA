@@ -1,0 +1,36 @@
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        unordered_map<char , char> mpp ;
+        bool ans1 = true;
+
+        unordered_map<char ,char> mpp1;
+        bool ans2 = true;
+        for(int i =0 ; i<s.size() ; i++){
+            if(mpp.find(s[i]) != mpp.end()){
+                if(mpp[s[i]] == t[i]){
+                    continue;
+                }else{
+                    ans1= false;
+                    break;
+                }
+            }else{
+                mpp[s[i]] = t[i];
+            }
+            //checking the symmetry of the arrays 
+            //like if only above was exectued the tc : s= badc ,t = baba was failing.
+            //so have to check the same for "t" array
+            if(mpp1.find(t[i]) != mpp1.end()){
+                if(mpp1[t[i]] == s[i]){
+                    continue;
+                }else{
+                    ans2= false;
+                    break;
+                }
+            }else{
+                mpp1[t[i]] = s[i];
+            }
+        }
+        return ans1 && ans2;
+    }
+};
