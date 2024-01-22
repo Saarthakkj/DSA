@@ -1,0 +1,37 @@
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        string s = strs[0];
+        string ans =  "";
+        bool found = true;
+
+        for(int j =1 ; j< s.size()+1 ; j++){
+            //found = true;
+            //make a substr string of j length: 
+            string temp = s.substr(0 , j);
+            for(int i =0 ; i< strs.size() ; i++){      
+                //cout<< strs[i] << " "<< temp << endl;
+                //cout<< "condition is : " << strs[i].find(temp) << endl;
+                if(strs[i].find(temp)  == 0){
+                    continue;
+                    //cout<< "ans is: "<< ans<< endl;
+                }
+                else{
+                    //break;
+                    found = false;
+                    break;
+                }
+            }
+            if(found){
+                ans = temp;
+            }
+            //if !found, nothing more is common so break the loop:
+            else{
+                return ans;
+            }
+            //cout<<" ans is: "<< ans << endl;
+            found = true;
+        }
+        return ans;
+    }
+};
