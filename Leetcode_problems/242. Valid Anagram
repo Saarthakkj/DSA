@@ -1,0 +1,31 @@
+//unordered_map >> map
+//see the implementation of one unordered_map instead of two
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        unordered_map<char , int> mpp1;
+        //unordered_map<char , int> mpp2;
+
+        //making an edge case for not equal lengths
+        if(s.size() != t.size()){
+            return false;
+        }
+
+        for(int i = 0 ; i< s.size() ; i++){
+            mpp1[s[i]]++;
+        }
+        for(int j = 0 ; j< s.size() ; j++){
+            mpp1[t[j]]--;
+        }
+
+        cout<< "mpp1[s[i]] : "<< mpp1[s[0]] << endl;
+
+        for(auto it = mpp1.begin() ; it!= mpp1.end() ; ++it){
+            if(it->second != 0){
+                return false;
+            }
+        }
+
+        return true;
+    }
+};
