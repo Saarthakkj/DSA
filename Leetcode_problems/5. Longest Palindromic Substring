@@ -1,0 +1,41 @@
+class Solution {
+public:
+    string longestPalindrome(string str) {
+        string ans = "";
+        int len =0;
+        int max_len = INT_MIN;
+        int s = 0;
+        int e = 0;
+        int start = 0;
+
+        for(int i = 0 ; i<str.size() ; i++){
+            s = i;
+            e = i;
+
+            //check for the odd palindromes centred at i :
+            while(s>= 0 and e <str.size() and str[s] == str[e]){
+                s--;
+                e++;
+            }
+
+            int len1 =(e-1) - (s+1) +1;
+
+            s = i;
+            e = i+1;
+
+            //check for even palindromes centred at i and i+1? 
+            while(s>= 0 and e<str.size() and str[s] == str[e]){
+                s--;
+                e++;
+            }
+            int len2 = (e-1) - (s+1) +1;
+
+            len = max(len1 , len2);
+            if(len > max_len){
+                max_len = len;
+                ans = str.substr( i - (max_len-1)/2 , max_len);
+            }
+        }
+        return ans;
+    }
+};
