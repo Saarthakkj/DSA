@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int beautySum(string s) {
+        int n = s.length();
+        int res = 0;
+        for(int i =0 ; i<n ; i++){
+            //need freq withing substrings
+            //so used map inside a for loop
+            map<char ,int> mpp;
+            for(int j =i ; j<n ;j++){
+                mpp[s[j]]++;
+                int minf = INT_MAX;
+                int maxf = INT_MIN;
+                for(const auto& p : mpp){
+                    minf = min(p.second , minf);
+                    maxf = max(p.second , maxf);
+                }
+                res += (maxf- minf);
+            }
+        }
+
+        return res;
+    }
+};
