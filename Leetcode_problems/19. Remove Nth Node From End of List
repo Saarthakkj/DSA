@@ -1,0 +1,61 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        //APPROACH : reverse the second half of the linkedlist and then remove nth node from end
+        ListNode* slow = head;
+        ListNode* fast = head;
+        int count =1;
+        while(fast != NULL and fast->next!= NULL){
+            count ++;
+            slow = slow-> next;
+            fast = (fast-> next)-> next;
+        }
+        int size = 0;
+
+        if(fast == NULL){
+            size = (count-1)*2;
+        }else{
+            size = (count-1)*2 +1;
+        }
+
+        //now traverse the linkedlist and stop at size-n
+        int index = 0;
+        ListNode* pt1 = head;
+        ListNode* slower = head;
+        //cout<< "size is : " << size << " n is : "<< n << endl;
+        while(index!= size-n and pt1!= NULL){
+            slower = pt1;
+            //cout<< " pt1->val : "<< pt1->val << " index is : " << index << endl;
+            pt1 = pt1-> next;
+            //cout<< " bc yaha kya hua hai fir pt1-> val :  " <<  pt1-> val  << endl;
+            index++;
+            
+        }
+        //cout<< " here the  value of pt1 is : " << pt1-> val ;
+
+       
+        if(slower == pt1){
+            //if slower == pt1 means the pointer never moved i.e. head is to removed
+            return pt1-> next;
+            //pt1 -> next == NULL;
+            //return NULL;
+        }
+        //pt1 is the node which is to be deleted
+        //slower is previous node of pt1
+        slower-> next =  pt1-> next;
+        pt1-> next = NULL;
+        
+        return head;
+
+    }
+};
