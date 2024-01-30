@@ -1,0 +1,76 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+
+    ListNode* merge(ListNode* left , ListNode* right){
+        ListNode* dummy = new ListNode(0);
+        ListNode* curr = dummy;
+        while(left && right){
+            //cout<< "executed" << endl;
+            if(left->val < right->val){
+                curr-> next = left;
+                left = left-> next;
+            }else{
+                curr->next = right;
+                right = right-> next;
+            }
+            curr = curr-> next;
+        }
+        if(left){
+            //left has the greatest element
+            curr-> next = left;
+        }else{
+            //right has the greatest element
+            curr-> next = right;
+        }
+        //end node should be null:
+        //curr-> next = NULL;
+
+        return dummy-> next;
+    }
+
+    ListNode* findmiddle(ListNode* head){
+        //find middle is changed so that slow gives previous value of slow than it used to 
+        //using this algo 
+        ListNode* slow = head;
+        ListNode* fast = head-> next;
+        while(fast && fast-> next){
+            slow = slow-> next;
+            fast = (fast->next )-> next;
+        }
+        // if (!fast && slow) {
+        //     return head;
+        // }
+        return slow;
+
+    }
+    ListNode* mergesort(ListNode* head){
+        if(!head || !(head->next)){
+            return head;
+        }
+        ListNode* mid = findmiddle(head);
+        ListNode* secondhalf = mid->next;
+        //cout << "head is : " << head->val << " mid is : "<< mid->val << " mid next "<<( mid->next)-> val  << endl;
+        
+        mid->next = nullptr;
+        // Now mid is the second half of the array
+        ListNode* left = mergesort(head);
+        ListNode* right = mergesort(secondhalf);
+        //cout<< "left : "<< left-> val << " right : "<< right-> val << endl;
+
+        return merge(left, right);
+    }
+    ListNode* sortList(ListNode* head) {
+        ListNode* ans = mergesort(head);
+        return ans;
+    };
+};
