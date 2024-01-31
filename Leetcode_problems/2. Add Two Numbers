@@ -1,0 +1,125 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode* ptr1 = l1;
+        ListNode* ptr2 = l2;
+        
+        // long long num1 = 0 ;
+        // long long num2 = 0;
+        vector<int> arr1 ;
+        vector<int> arr2;
+
+        ListNode* head = NULL;
+        ListNode* curr = NULL;
+        int carry = 0;
+        while(ptr1 && ptr2){
+            if(carry==0){
+                int sum = ptr1->val + ptr2-> val;
+                if(sum>9){
+                    carry = 1;
+                    sum-=10;
+                }
+                ListNode* tempNode = new ListNode(sum);
+                if(!head){
+                    head = tempNode ;
+                    curr = head;
+                }else{
+                    curr-> next = tempNode;
+                    curr = tempNode;
+                }
+
+                //add the node into the new linkedlsit
+            }
+            else{
+                int sum = ptr1->val + ptr2-> val + 1;
+                if(sum>9){
+                    carry = 1;
+                    sum -=10;
+                }else{
+                    //reset the carry value to 0
+                    carry = 0;
+                }
+                ListNode* tempNode = new ListNode(sum);
+                if(!head){
+                    head = tempNode ;
+                    curr = head;
+                }else{
+                    curr-> next = tempNode;
+                    curr = tempNode;
+                }
+            }
+
+            //cout << "ptr1 " << ptr1-> val << " ptr2 : " << ptr2-> val << endl;
+            ptr1 = ptr1->next;
+            ptr2 = ptr2-> next;
+
+        }
+
+        //what happens if one of the pointers is not null 
+        ListNode* ptr3  = NULL;
+        //cout << "carry : " << carry << endl;
+
+        if(!ptr1 and !ptr2 && !carry){
+            return head;
+        }
+        else if(ptr1 == NULL and ptr2 == NULL and carry == 1){
+            //if single single elements are present and carry == 1
+            ListNode* temp = new ListNode(1);
+            curr-> next = temp;
+            curr = temp;
+            carry  = 0;
+        }
+        else{
+            if(ptr1){
+                //cout<< "ptr1: "<< ptr1-> val << endl;
+                ptr3 = ptr1;
+            }
+            else{
+                //cout<< "ptr2 : "<< ptr2-> val << endl;
+                ptr3 = ptr2;
+            }
+        }
+        while(ptr3){
+            //cout<< " executed here " << endl;
+            if(carry){
+                if(ptr3->val+1 <=9){
+                    ListNode* tempNode = new ListNode(ptr3->val+1);
+                    curr-> next = tempNode;
+                    curr = tempNode;
+                    carry = 0;
+                }else{
+                    int num =  ptr3->val+1 -10;
+                    //cout<< "num is : "<< num << endl;
+                    ListNode* tempNode = new ListNode(num);
+                    curr-> next = tempNode;
+                    curr = tempNode;
+                    carry = 1;  
+                }
+            }else{
+                ListNode* tempNode = new ListNode(ptr3->val);
+                curr-> next = tempNode;
+                curr= tempNode;
+            }
+            ptr3 = ptr3->next;
+        }
+        if(carry == 1){
+            //one last no. is left to be added which is ofc "1"
+            ListNode* temp = new ListNode(1);
+            curr-> next = temp;
+            curr = temp;
+        }
+
+        return head;
+
+    }
+};
