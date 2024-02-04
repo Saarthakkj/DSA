@@ -1,0 +1,85 @@
+/*
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    Node* next;
+    Node* random;
+    
+    Node(int _val) {
+        val = _val;
+        next = NULL;
+        random = NULL;
+    }
+};
+*/
+
+class Solution {
+public:
+
+    Node* iterate(Node* head, int key){
+        while(key){
+            head = head->next;
+            key--;
+        }
+        return head;
+    }
+
+    int calcindex(Node* head , Node* ptr){
+        int in = 0;
+        if(head == ptr){
+            return 0;
+        }
+        Node* temp= head;
+        while( temp!= NULL){
+            temp = temp->next;
+            in++;
+            if(ptr == temp){
+                return in;
+            }
+        }
+        return in;
+    }
+    
+    Node* copyRandomList(Node* head) {
+        //first make the copy of the nodes without random pointer
+        //store all the nodes in a hashmap
+        //then traverse through the linkedlist again and make random pointers their value
+        Node* new_head = new Node(0);
+        Node* new_tail = new_head;
+        Node* ptr = head;
+        map<Node* , int> mpp;
+        while(ptr){
+            mpp[ptr] = ptr->val;
+            Node* temp = new Node(ptr->val);
+            new_tail->next = temp;
+            new_tail = temp;
+            ptr=ptr->next;
+            //cout<< "hey";
+        }
+        new_tail->next = NULL;
+        ptr = head;
+        Node* ptr2 = new_head->next;
+        //ptr2 is for the new linkedlist
+        while(ptr){
+            if(ptr->random == NULL){
+                //cout<< "ptr->val : " << ptr->val <<" ptr2->val : " << ptr2->val << endl;
+                ptr = ptr->next;
+                ptr2 = ptr2->next;
+                continue;
+            }
+            //calculate index of ptr->random
+            int in = calcindex(head, ptr->random);
+
+            //search the element in new linkedlist
+            auto it = iterate(new_head->next, in);
+            //cout<< "a4 ll";
+            ptr2->random = it;
+            ptr = ptr->next;
+            ptr2=ptr2->next;
+            //cout<<"hey this is";
+        }
+
+        return new_head->next;
+    }
+};
