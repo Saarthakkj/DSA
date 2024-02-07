@@ -1,0 +1,22 @@
+class Solution {
+public:
+    bool ans = true;
+    void fxn(long long num ,int n){
+        if(num>n){
+            ans = false;
+            return ;
+        }
+        if(num ==n){
+            return ;
+        }
+        num*=2;
+        return fxn(num ,n);
+    }
+    bool isPowerOfTwo(int n) {
+        if(n ==1){
+            return true;
+        }
+        fxn(1, n);
+        return ans;
+    }
+};
