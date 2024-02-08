@@ -1,0 +1,46 @@
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* prev = NULL;
+        ListNode* curr = head;
+        while(curr) {
+            ListNode* next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
+    
+    void reorderList(ListNode* head) {
+        if(!head || !head->next) {
+            return;
+        }
+        
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while(fast->next && fast->next->next) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        
+        ListNode* secondHalf = slow->next;
+        slow->next = NULL;
+        
+        secondHalf = reverseList(secondHalf);
+        // second half of the linkedlist is reversed
+
+        ListNode* p1 = head;
+        ListNode* p2 = secondHalf;
+        while(p2){
+            ListNode* t1 = p1->next;
+            ListNode* t2 = p2->next;
+
+            p1->next = p2;
+            p2->next = t1;
+
+            p1 = t1;
+            p2 = t2;
+        }
+    }
+};
