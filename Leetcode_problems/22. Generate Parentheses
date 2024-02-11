@@ -1,0 +1,29 @@
+class Solution {
+public:
+    vector<string> ans ; 
+    void f(int l ,int r , int n , string s ){
+        if(l==n && r == n){
+            ans.push_back(s);
+        }
+        if(l!=n){
+            s += "(";
+            f(l+1 , r , n, s);
+            s.pop_back();
+            // s+=")";
+            // f(l , r+1 , n , s);
+        }
+        if(r<l){
+            //s += ")" only if r<l , a new paranthesis cannot start with a closing bracket
+            s+=")";
+            f(l , r+1 , n, s);  
+        }   
+    }
+    vector<string> generateParenthesis(int n) {
+        int i = 0;
+        string s = "";
+        int l = 0;
+        int r = 0;
+        f(l , r ,  n , s );
+        return ans;
+    }
+};
