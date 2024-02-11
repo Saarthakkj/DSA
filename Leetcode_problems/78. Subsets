@@ -1,0 +1,20 @@
+class Solution {
+    vector<vector<int>>ans;
+public:
+    void solve(vector<int> nums ,int i , int n , vector<int> v  ){
+        if(i==n){
+            ans.push_back(v);
+            return ;
+        }
+        v.push_back(nums[i]); // the take option
+        solve(nums, i+1 , n , v);
+        v.pop_back(); //the not take option , nums[i] is removed
+        solve(nums, i+1 , n , v);
+    }
+    vector<vector<int>> subsets(vector<int>& nums) {
+        int i=0,n=nums.size();
+        vector<int>v = {};
+        solve(nums,i,n,v);
+        return ans;
+    }
+};
