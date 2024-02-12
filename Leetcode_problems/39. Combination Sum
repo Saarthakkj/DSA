@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<vector<int>> ans;
+    void f(int key , vector<int>& arr ,int s , vector<int> curr){
+        if(key==0){
+            ans.push_back(curr);
+        }
+        for(int i = s ; i < arr.size() ; i++ ){
+            if(key - arr[i] >= 0){
+                curr.push_back(arr[i]); //take decision
+                f(key - arr[i] , arr , i , curr);// see s = i to maintain the repeated freqeunt characters
+                //like 8 = 2 2 2 2
+                curr.pop_back(); // not-take decision
+            }
+        }
+    }
+    vector<vector<int>> combinationSum(vector<int>& arr, int key) {
+        sort(arr.begin() , arr.end());
+        vector<int> curr = {};
+        f(key , arr ,0 ,curr);
+        return ans;
+    }
+};
