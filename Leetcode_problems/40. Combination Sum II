@@ -1,0 +1,34 @@
+class Solution {
+public:
+    set<vector<int>> result ;
+    void f(vector<int>& candidates, int target, vector<int>& current, int start) {
+        if(target ==0 ){
+            result.insert(current);
+            return ;
+        }
+
+        for(int i = start ; i<candidates.size() ; i++){
+            //as ith element is already added, it's not been candidates[i] is checked with candidates[i-1]
+            if(i > start && candidates[i] == candidates[i-1] ){
+                continue;
+            }
+
+            if(candidates[i] > target){
+                break;
+            }
+            
+            current.push_back(candidates[i]);
+            f(candidates, target-candidates[i] , current, i+1);
+            current.pop_back();
+        }
+    }
+    vector<vector<int>> combinationSum2(vector<int>& arr, int key) {
+        sort(arr.begin() , arr.end());
+        vector<int> curr = {};
+        int i = 0 ;
+        f(arr , key , curr , i);
+
+        vector<vector<int>> ans(result.begin() , result.end());
+        return ans;
+    }
+};
