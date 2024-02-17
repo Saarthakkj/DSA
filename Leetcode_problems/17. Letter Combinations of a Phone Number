@@ -1,0 +1,120 @@
+class Solution {
+public:
+    vector<string> ans = {};
+    void f(int i , string digits , string curr ){
+        if(i==digits.size() and curr!=""){
+            //cout<< "dig.size: " << digits.size()-1;
+            ans.push_back(curr);
+            return ;
+        }
+        char c = digits[i];
+        //cout<< "c: "<< c << " i is : "<< i << endl;
+        switch(c){
+            case '2':
+                curr.push_back('a');
+                f(i+1 , digits , curr);
+                curr.pop_back();
+                curr.push_back( 'b');
+                f(i+1 , digits , curr);
+                curr.pop_back();
+                curr.push_back( 'c');
+                f(i+1 , digits , curr);
+                curr.pop_back();
+                break;
+            case '3':
+                curr.push_back( 'd');
+                f(i+1 , digits , curr);
+                curr.pop_back();
+                curr.push_back( 'e');
+                f(i+1 , digits , curr);
+                curr.pop_back();
+                curr.push_back( 'f');
+                f(i+1 , digits , curr);
+                curr.pop_back();
+                break;
+            case '4':
+                curr.push_back( 'g');
+                f(i+1 , digits , curr);
+                curr.pop_back();
+                curr.push_back( 'h');
+                f(i+1 , digits , curr);
+                curr.pop_back();
+                curr.push_back( 'i');
+                f(i+1 , digits , curr);
+                curr.pop_back();
+                break;
+            case '5':
+                curr.push_back( 'j');
+                f(i+1 , digits , curr);
+                curr.pop_back();
+                curr.push_back( 'k');
+                f(i+1 , digits , curr);
+                curr.pop_back();
+                curr.push_back( 'l');
+                f(i+1 , digits , curr);
+                curr.pop_back();
+                break;
+            case '6':
+                curr.push_back( 'm');
+                f(i+1 , digits , curr);
+                curr.pop_back();
+                curr.push_back( 'n');
+                f(i+1 , digits , curr);
+                curr.pop_back();
+                curr.push_back( 'o');
+                f(i+1 , digits , curr);
+                curr.pop_back();
+                break;
+            case '7':
+                curr.push_back( 'p');
+                f(i+1 , digits , curr);
+                curr.pop_back();
+                curr.push_back( 'q');
+                f(i+1 , digits , curr);
+                curr.pop_back();
+                curr.push_back( 'r');
+                f(i+1 , digits , curr);
+                curr.pop_back();
+                curr.push_back( 's');
+                f(i+1 , digits , curr);
+                curr.pop_back();
+                break;
+            case '8':
+                curr.push_back( 't');
+                f(i+1 , digits , curr);
+                curr.pop_back();
+                curr.push_back( 'u');
+                f(i+1 , digits , curr);
+                curr.pop_back();
+                curr.push_back( 'v');
+                f(i+1 , digits , curr);
+                curr.pop_back();
+                break;
+            case '9':
+                curr.push_back( 'w');
+                f(i+1 , digits , curr);
+                curr.pop_back();
+                curr.push_back( 'x');
+                f(i+1 , digits , curr);
+                curr.pop_back();
+                curr.push_back( 'y');
+                f(i+1 , digits , curr);
+                curr.pop_back(); 
+                curr.push_back( 'z');
+                f(i+1 , digits , curr);
+                curr.pop_back(); 
+                break;
+            default : 
+                break;
+        }
+
+
+
+    }
+    vector<string> letterCombinations(string digits) {
+        int i = 0 ;
+        string curr = "";
+        f(i , digits , curr);
+        return ans;
+    }
+};
