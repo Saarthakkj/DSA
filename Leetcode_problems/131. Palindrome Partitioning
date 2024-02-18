@@ -1,0 +1,38 @@
+class Solution {
+public:
+    vector<vector<string>> ans ;
+    bool isPalindrome(const string& str , int start , int end) {
+        string s =  str.substr(start , (end-start)+1);
+        int left = 0;
+        int right = s.size() - 1;
+        
+        while (left < right) {
+            if (s[left] != s[right])
+                return false;
+            ++left;
+            --right;
+        }
+        
+        return true;
+    }
+    void backtrack(const string& str, int start, vector<string>& curr) {
+        if (start == str.size()) {
+            ans.push_back(curr);
+            return;
+        }
+        
+        for (int end = start; end < str.size(); ++end) {
+            if (isPalindrome(str, start, end)) {
+                curr.push_back(str.substr(start, end - start + 1));
+                backtrack(str, end + 1, curr);
+                curr.pop_back();
+            }
+        }
+    }
+    vector<vector<string>> partition(string str) {
+        int i = 0 ;
+        vector<string> curr = {};
+        backtrack(str , i , curr);
+        return ans;
+    }
+};
