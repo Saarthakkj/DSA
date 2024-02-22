@@ -1,0 +1,98 @@
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+    
+        //if quotient is greater than INT_MAX or INT_MIN 
+        long d = dividend;
+        long v = divisor;
+
+        //checking for neg 
+        bool isneg = false;
+        if(v<0^d<0){
+            isneg = true;
+            //cout<< " isneg: "<< isneg;
+        }
+        int d_size ;
+        int v_size;
+        v = abs(v);
+        d = abs(d);
+        //cout<< " v : "<< v << " d is: "<< d << endl;
+
+        if(v > d){
+            return 0;
+        }
+        
+        for(int i =0; i < 32 ; i++){
+            long int temp = pow(2, i);
+            //cout<< "temp is: "<< temp << endl;
+            if(temp > d){
+                d_size = i-1;
+                break;
+            }
+        }
+        for(int i = 0; i < 32 ; i++){
+            long int temp = pow(2, i);
+            if(temp > v) {
+                v_size = i-1;
+                break;
+            }
+        }
+        //pow function can return 2^30 at max
+        //so ,
+        
+        int shift = d_size - v_size;
+        //cout<< "d_size is : " << d_size<< " "<< " v_size is : "<< v_size ;
+        //cout<< "shift is : "<< shift ;
+        long new_v = v << shift ; 
+        while(new_v > d){
+            new_v = new_v>>1 ;
+            //cout<< " new_v" <<  new_v << "d is : " << d << "shift : "<< shift << endl;
+            shift--;
+        }
+        //cout<< " new_v is : "<< new_v << " d is : "<< d ;
+        //new_v is <= d , perfect for subtracting
+        
+        vector<int > num = {};
+        //cout<< "shift is : "<< shift;
+        while(shift>=0){
+            //cout<< " shifted num : "<< new_v  << " shift : " << shift <<  " new_v : "<< new_v << " d is : "<< d << endl;
+            if(new_v>d){
+                //cout<< "added 0";
+                num.push_back(0);
+            }
+            else{
+                num.push_back(1);
+                //cout<< " added 1" << endl;
+                d-= new_v;
+            }
+            new_v = new_v>>1;
+            shift--;
+        }
+
+        long ans = 0;
+        for(int i = num.size()-1 ; i>=0; i--){
+            int temp = num[i];
+            
+            ans += temp*pow(2 , (num.size()-1-i) );
+            //cout<< "ans is : "<< ans << endl;
+
+            //cout<< " ans is: "<< ans << endl;
+        }
+
+        if(isneg){
+            ans *=-1;
+            //cout<< "isneg: " << isneg;
+        }
+
+        if(ans < INT_MIN ){
+            return INT_MIN;
+        }
+        if(ans> INT_MAX){
+            return INT_MAX ;
+        }
+
+        return ans;
+
+
+    }
+};
