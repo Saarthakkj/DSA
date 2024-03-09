@@ -6,14 +6,14 @@ public:
         int max_area = 0 ; 
         for(int i   =0 ; i < arr.size() ; i++){
             int curr_height = arr[i];
-            cout<< "curr_height is : "<< curr_height << endl;
+            //cout<< "curr_height is : "<< curr_height << endl;
             int ind = i ;
             while(!stack.empty() and stack.top().second > curr_height){
                 ind  = stack.top().first ;
                 int height = stack.top().second ;
                 //calc. the area
                 int area = height * (i - ind);
-                cout<< "area here : "<< area << endl;
+                //cout<< "area here : "<< area << endl;
                 max_area = max(max_area , area);
                 stack.pop();
             }
@@ -24,7 +24,7 @@ public:
             int ind = stack.top().first ;
             int height = stack.top().second ; 
             int area = (n- ind)* (height);
-            cout<< "area here is : "<< area << endl;
+            //cout<< "area here is : "<< area << endl;
             max_area = max(area , max_area);
             stack.pop();
         }
@@ -50,7 +50,7 @@ public:
                     }
                     i1--;
                 }
-                cout<< "height : "<< height << endl;
+                //cout<< "height : "<< height << endl;
                 v.push_back(height);
             }
             //made histogram for ith row 
