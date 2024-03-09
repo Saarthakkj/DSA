@@ -34,29 +34,25 @@ public:
         int row = matrix.size();
         int col = matrix[0].size();
         int max_area = 0 ;
+
+
+        vector<int> height(col , 0);
         
         //need to solve the histogram problem for every row :
         for(int i = 0 ; i < row ; i++){
-            //make histograms
-            vector<int> v ; 
             for(int j =  0 ; j< col ; j++){
-                int height = 0  ;
-                int i1 = i;
-                while(i1 >= 0 ){
-                    if(matrix[i1][j] == '0'){
-                        break;
-                    }else{
-                        height +=1;
-                    }
-                    i1--;
+                if(matrix[i][j]== '1'){
+                    height[j]++;
                 }
-                //cout<< "height : "<< height << endl;
-                v.push_back(height);
+                else{
+                    height[j] = 0 ;
+                    continue;
+                }
             }
             //made histogram for ith row 
             //now evaluate the max rectangle in this histogram
             
-            int area = histogram(v);
+            int area = histogram(height);
             cout<< "area : "<< area << endl;
             max_area = max(max_area , area);
         }
