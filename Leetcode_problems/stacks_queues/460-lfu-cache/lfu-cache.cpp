@@ -33,7 +33,7 @@ struct List{
     void removenode(node* delnode){
         node* delprev = delnode->prev;
         node* delnext = delnode->next;
-        cout<< "delnode: "<< delnode->val << "delnode prev : " << delnode->prev->val ; 
+        //cout<< "delnode: "<< delnode->val << "delnode prev : " << delnode->prev->val ; 
         delprev->next = delnext;
         delnext->prev = delprev;
         size--; 
@@ -58,18 +58,18 @@ public:
     void updatefreqlistmap(node *curr){
         keynode.erase(curr->key);
         //remove the node from the cooresponding frequency list: 
-        cout<< "curr is: "<< curr->val << endl;
+        //cout<< "curr is: "<< curr->val << endl;
         freqlist[curr->freq]->removenode(curr);
 
         //check if the node deleted was the min freq node
         if(curr->freq == min_freq){
             //check if last node or not
-            cout<< "curr->freq : "<< curr->freq ;
+            //cout<< "curr->freq : "<< curr->freq ;
             if(freqlist[curr->freq]->size == 0 ){
                 //true than 
-                cout<< "min _freq here : "<< min_freq << endl;
+                //cout<< "min _freq here : "<< min_freq << endl;
                 min_freq++ ;
-                cout<< "min _freq here2: "<< min_freq << endl;
+                //cout<< "min _freq here2: "<< min_freq << endl;
             }
         }
 
@@ -119,13 +119,13 @@ public:
             if(cap == max_cap){
                 //remove lru 
                 //that is list->tail->prev
-                cout<< " min freq is: "<< min_freq << endl;
+                //cout<< " min freq is: "<< min_freq << endl;
                 List* del_list =  freqlist[min_freq];
-                cout<< "key and value is : "<< key << " " <<  value << endl;
-                cout<< "head->next->val : "<< del_list->head->next -> val << endl;
+                //cout<< "key and value is : "<< key << " " <<  value << endl;
+                //cout<< "head->next->val : "<< del_list->head->next -> val << endl;
                 keynode.erase(del_list->tail->prev->key);
                 node* del_node = del_list->tail->prev ; 
-                cout<< "del_node  : "<< del_node->val << endl;
+                //cout<< "del_node  : "<< del_node->val << endl;
                 del_list->removenode(del_node); 
                 cap --  ;
             }
