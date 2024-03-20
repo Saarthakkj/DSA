@@ -9,13 +9,14 @@ public:
         while(r<n){
             if(!nums[r]){
                 temp++ ; 
-                while(temp> k){
-                    if(nums[l] ==0 ){
-                        temp--;
-                    }
-                    l++;
-                }
+                
                 //len = max(len , r-l+1) ;
+            }
+            while(temp> k){
+                if(nums[l] ==0 ){
+                    temp--;
+                }
+                l++;
             }
             len = max(len , r-l+1);
             //cout<< " l : "<< l << " r : "<< r << "len is : "<< len<< endl;
