@@ -1,6 +1,9 @@
 class Solution {
 public:
     int func(vector<int>& nums , int goal ){
+        if(goal <0){
+            return 0 ; 
+        }
         int l = 0;
         int r = 0;
         int sum = 0;
@@ -9,7 +12,8 @@ public:
 
         while(r < n){
             sum += nums[r];
-            while(sum > goal and r>=l){
+            //cout<< " l is : "<< l << "r is : "<< r<<endl;
+            while(sum > goal ){
                 sum -= nums[l];
                 l++ ; 
             }
