@@ -1,7 +1,6 @@
 class Solution {
 public:
     int func( vector<int>& arr ,  int k ){
-        map<int,int> mpp ; 
         int l = 0 ;
         int r  = 0 ;
         int ans= 0  ; 
@@ -16,7 +15,6 @@ public:
                     }
                     l++ ; 
                 }
-                mpp[r] =  oddcount ; 
             }
             ans+= (r-l+1);
             //cout<< "r : "<< r << " l : "<< l << endl;
