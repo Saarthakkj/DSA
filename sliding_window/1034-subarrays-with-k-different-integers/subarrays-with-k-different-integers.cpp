@@ -8,7 +8,7 @@ public:
         int r= 0 ; 
         int uniq_c = 0 ;
         int ans = 0 ;
-        map<int , int> mpp  ;
+        unordered_map<int , int> mpp  ;
         while(r < arr.size()){
             if(mpp[arr[r]] ==  0){
                 uniq_c ++ ; 
