@@ -4,7 +4,7 @@ public:
         priority_queue<int> max_heap ; 
         queue<pair< int ,int> > q ; 
 
-        map<char , int> mpp ;
+        unordered_map<char , int> mpp ;
         for(int i = 0 ; i < tasks.size() ; i++){
             mpp[tasks[i]] ++ ; 
         }
