@@ -1,13 +1,13 @@
 class KthLargest {
 public:
-    priority_queue<int , vector<int> , greater<int>> max_heap  ; 
+    priority_queue<int , vector<int> , greater<int>> min_heap  ; 
     int kay ; 
     KthLargest(int k, vector<int>& nums) {
         kay = k ; 
         for(int i = 0 ;i < nums.size() ; i++){
-            max_heap.push(nums[i]) ; 
-            if(max_heap.size() > kay){
-                max_heap.pop() ; 
+            min_heap.push(nums[i]) ; 
+            if(min_heap.size() > kay){
+                min_heap.pop() ; 
             }
         }
 
@@ -16,11 +16,12 @@ public:
     }
     
     int add(int val) {
-        max_heap.push(val); 
-        if(max_heap.size() > kay){
-            max_heap.pop() ; 
+        min_heap.push(val); 
+        if(min_heap.size() > kay){
+            min_heap.pop() ; 
         }
-        return max_heap.top()  ;
+        return min_heap.top()  ;
+        //minheap top is the lowest element among all the elements i.e. kth largest elemnt
     }
 };
 
