@@ -2,7 +2,7 @@ class Solution {
 public:
     bool isNStraightHand(vector<int>& hand, int gS) {
         if(hand.size() % gS != 0){
-            cout<< "false no 1" ;
+            //cout<< "false no 1" ;
             return false ; 
         }
 
@@ -27,7 +27,7 @@ public:
             for(int i =  0 ; i < gS ; i++ ){
                 int curr = ele + i ; 
                 if(mpp.find(curr) == mpp.end() or mpp[curr] == 0){
-                    cout<< "false no 2"; 
+                    //cout<< "false no 2"; 
                     return false; 
                 }
                 //if it is present , decrease its frequency 
@@ -39,7 +39,7 @@ public:
                     if (curr == min_heap.top()) {
                         min_heap.pop(); // Remove the next smallest card from the min heap
                     } else {
-                        cout << "false no 3" << endl;
+                        //cout << "false no 3" << endl;
                         return false;
                     }
                 }
