@@ -13,8 +13,8 @@ public:
                 b.push({s[i] , i}) ; 
                 if(f.empty()){
                     if(a.empty()){
-                        cout<< "f.size() : "<< f.size()  << " a.size(): "<< a.size() ;
-                        cout<< " returning false here i is: " << s.size() -i; 
+                        // cout<< "f.size() : "<< f.size()  << " a.size(): "<< a.size() ;
+                        // cout<< " returning false here i is: " << s.size() -i; 
                         return false;
                     }
                     else{
@@ -36,16 +36,16 @@ public:
             if(a.empty() and !f.empty()){
                 return false;
             }
-            cout<< "f.empty: "<< f.empty() <<" a empty: "<< a.empty();
+            //cout<< "f.empty: "<< f.empty() <<" a empty: "<< a.empty();
             if(f.top().second < a.top().second){
-                cout<< "here is f and a"<< endl ;
+                //cout<< "here is f and a"<< endl ;
                 f.pop() ;
                 a.pop() ;
             }else{
                 return false;
             }
         }
-        cout<< "f size: " << f.size() << " b.size(): "<< b.size() << " a size:  "<< a.size() ;
+        //cout<< "f size: " << f.size() << " b.size(): "<< b.size() << " a size:  "<< a.size() ;
         // int temp =  f.size() - b.size() ;
         return ((f.empty() and b.empty()) or (f.size() <= a.size()) );
     }
