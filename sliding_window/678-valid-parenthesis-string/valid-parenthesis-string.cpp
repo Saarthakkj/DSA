@@ -47,6 +47,6 @@ public:
         }
         //cout<< "f size: " << f.size() << " b.size(): "<< b.size() << " a size:  "<< a.size() ;
         // int temp =  f.size() - b.size() ;
-        return ((f.empty() and b.empty()) or (f.size() <= a.size()) );
+        return true ;
     }
 };
