@@ -19,17 +19,10 @@ public:
             return false;
         }
 
-        if(root1->val == root2->val){
-            if(check(root1->left, root2->right) and check(root1->right , root2->left)){
-                return true; 
-            }else{
-                return false;
-            }
-        }else{
-            return false;
+        if(root1->val == root2->val and check(root1->left, root2->right) and check(root1->right , root2->left)){
+            return true;
         }
-
-        return true;
+        return false;
     }
     bool isSymmetric(TreeNode* root) {
         return check(root->left , root->right) ;
