@@ -21,7 +21,7 @@ public:
 
       if (graph[row][col] == key) { // Only check for the initial key color
         graph[row][col] = color;
-        cout<< "row :"<< row << " col "<< col << endl;
+        //cout<< "row :"<< row << " col "<< col << endl;
 
         for (int i = 0; i < 2; i++) {
           int temp1 = i % 2;
@@ -31,14 +31,14 @@ public:
             if( graph[row + temp1][col + temp2] == color){
                 continue;
             }
-            cout<< "pushed: "<< row+temp1 << " "<< col+temp2<< endl;  
+            //cout<< "pushed: "<< row+temp1 << " "<< col+temp2<< endl;  
             q.push(make_pair(row + temp1, col + temp2));
           }
           if (row - temp1 >= 0 && col - temp2 >= 0 && graph[row - temp1][col - temp2] == key) {
             if(graph[row-temp1][col-temp2] == color){
                 continue;
             }
-            cout<< "pushed  : "<< row-temp1 << " , "<< col-temp2 << endl; 
+            //cout<< "pushed  : "<< row-temp1 << " , "<< col-temp2 << endl; 
             q.push(make_pair(row - temp1, col - temp2));
           }
         }
