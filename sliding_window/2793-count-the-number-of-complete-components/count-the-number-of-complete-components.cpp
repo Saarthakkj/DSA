@@ -25,7 +25,7 @@ private:
     // DFS exploration
     void dfs(int node, vector<vector<int>>& graph, vector<bool>& visited , vector<int>&  components) {
         components.push_back(node) ; 
-        cout<< "node : "<< node << endl ;
+        //cout<< "node : "<< node << endl ;
         visited[node] = true;
         for (int neighbor : graph[node]) {
             if (!visited[neighbor]) {
@@ -36,9 +36,9 @@ private:
 
     bool isComplete(vector<int>& components , vector<vector<int>>& graph){
         int k = components.size()  ; 
-        cout<< " k is : "<< k << endl;
+        //cout<< " k is : "<< k << endl;
         for(int comp : components){
-            cout<< " comp: "<< comp << " graph[comp] : "<< graph[comp].size()<< endl;
+            //cout<< " comp: "<< comp << " graph[comp] : "<< graph[comp].size()<< endl;
             if(graph[comp].size() != k-1){
                 return false;
             }
