@@ -26,7 +26,7 @@ public:
         for(int row = 0 ; row < max_row ; row++){
             int col = 0 ;
             if(board[row][col] == 'O' and visited[row][col] == 0 ){
-                cout<< "row : "<< row << "col: "<< col << endl;
+                //cout<< "row : "<< row << "col: "<< col << endl;
                 visited[row][col] = 1; 
                 dfs(board , visited , row , col);
             }
@@ -35,7 +35,7 @@ public:
             int col = max_col-1 ;
             if(board[row][col] == 'O' and visited[row][col] == 0){
                 visited[row][col] = 1; 
-                cout<< "row : "<< row << "col: "<< col << endl;
+                //cout<< "row : "<< row << "col: "<< col << endl;
                 dfs(board , visited , row , col);
             }
         }
@@ -43,7 +43,7 @@ public:
             int row = 0 ;
             if(board[row][col] == 'O' and visited[row][col] == 0){
                 visited[row][col] = 1; 
-                cout<< "row : "<< row << "col: "<< col << endl;
+                //cout<< "row : "<< row << "col: "<< col << endl;
                 dfs(board , visited , row , col);
             }
         }
@@ -51,7 +51,7 @@ public:
             int row = max_row-1 ;
             if(board[row][col] == 'O' and visited[row][col] == 0){
                 visited[row][col] = 1; 
-                cout<< "row : "<< row << "col: "<< col << endl;
+                //cout<< "row : "<< row << "col: "<< col << endl;
                 dfs(board , visited , row , col);
             }
         }
