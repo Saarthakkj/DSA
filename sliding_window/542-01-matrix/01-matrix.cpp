@@ -44,8 +44,6 @@ public:
             //visited[row][col] = 1;
             res[row][col] = dist; 
 
-            res[row][col] = dist;
-
             //search for '1' in the array : 
             for(int i = 0 ; i< 4; i++){
                 int n_row = row+d_row[i] ; 
