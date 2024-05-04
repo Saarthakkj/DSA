@@ -46,7 +46,7 @@ public:
 
             int row = cell.i;
             int col = cell.j;
-            max_time = cell.time;
+            max_time = max(max_time , cell.time);
             
             graph[row][col] = 2; // orange rotten
             visited[row][col]  = 1;
