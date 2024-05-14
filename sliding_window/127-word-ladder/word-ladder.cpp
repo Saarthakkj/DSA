@@ -32,30 +32,17 @@ public:
             }
             // ans++ ; 
 
-            for(auto it = st.begin(); it != st.end();) {
-                string shabd = *it; 
-                int count = 0;
-                for(int j = 0; j < word.size(); j++) {
-                    if(word[j] != shabd[j]) {
-                        count++; 
-                    }
-                    if(count > 1) {
-                        break;
+            //set length approach fails and set length can be very large and we might get count ==1 element in last 
+            for(int i = 0 ; i < word.size() ; i++){
+                char original = word[i] ; 
+                for(char c = 'a' ; c <= 'z' ; c++){
+                    word[i] = c;
+                    if(st.count(word) !=0 ){
+                        st.erase(word); 
+                        q.push(make_pair(word , ans+1)) ;
                     }
                 }
-                //cout<< "shabd: "<< shabd << " word: "<< word << " count : "<< count << endl;
-                if(count == 1) {
-                    q.push(make_pair(*it, ans + 1)); 
-                    //cout << "*it: " << *it << endl;
-                    auto next_it = next(it) ; 
-                    // Increment the iterator before erasing
-                    // Erase the element
-                    st.erase(it);
-                    it = next_it; 
-                } else {
-                    // Move to the next value
-                    ++it;
-                }
+                word[i] =  original   ;
             }
         }
         return 0 ; 
