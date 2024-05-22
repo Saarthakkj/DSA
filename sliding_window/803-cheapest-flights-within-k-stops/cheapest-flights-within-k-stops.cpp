@@ -27,12 +27,12 @@ public:
                 continue;  
             }
             //cout<< "stop : "<< stop << "cost: "<< cost << "curr : "<< curr << endl;
-            // if(curr == dest){
-            //     //cout<< "k : "<< k << " stops :"<< stop ;
-            //     if(stop-1 <=k){
-            //         min_cost = min(cost, min_cost); 
-            //     }  
-            // }       
+            if(curr == dest){
+                //cout<< "k : "<< k << " stops :"<< stop ;
+                if(stop-1 <=k){
+                    min_cost = min(cost, min_cost); 
+                }  
+            }       
             
             for (const auto& it : adj[curr]) {
                 int node = it.first ; 
