@@ -18,7 +18,7 @@ public:
             int time = pq.top().first; 
 
             pq.pop() ;
-            cout<< "row : "<< row<< " col : "<< col << endl;
+            //cout<< "row : "<< row<< " col : "<< col << endl;
 
             if(row == n-1 and col == n-1 ){
                 return time; 
