@@ -111,14 +111,14 @@ public:
                         if(n_row < n and n_row >= 0 and n_col < n and n_col >= 0 and graph[n_row][n_col]== 1){
                             // island_size+=  ds.size[ds.findUpar(n*n_row + n_col)] ; 
                             //cout<< " n*n_row + n_col: "<< n*n_row + n_col ;
-                            cout<< "upar: "<< ds.findUpar(n_row*n + n_col) ;
+                            //cout<< "upar: "<< ds.findUpar(n_row*n + n_col) ;
                             s.insert(ds.findUpar(n_row*n + n_col)) ;
 
                         }
                     }
 
                     for(auto it : s){
-                        cout<< "it " << it<< " ds.size : "<< ds.size[it] ;
+                        //cout<< "it " << it<< " ds.size : "<< ds.size[it] ;
                         island_size+= ds.size[it] ;
                         //cout<< " it : "<< it;
                     }
