@@ -1,42 +1,32 @@
+#define ll long long int
 class Solution {
 public:
 
     long long maximumTotalDamage(vector<int>& power) 
     {
-        map<long long,long long> m;
-        for(int i : power)
-            m[i]++;
-        vector<int> arr;
-        for(auto a: m)
-            arr.push_back(a.first);
-        // sort(arr.begin(),arr.end());
-        vector<long long> dp(arr.size(),0),v(arr.size(),-1);
+       map<ll , ll> mpp;
+       for(int i = 0 ; i < power.size(); i++){
+            mpp[power[i]]++;
+       }
 
-        dp[arr.size()-1] = (arr.back()*m[arr[arr.size()-1]]);
-
-        for(int i = arr.size()-1; i >= 0; i--)
-        {
-            int ind = arr.size();
-            for(int j = i; j < arr.size(); j++)
-            {
-                if(arr[j] > arr[i]+2)
-                {
-                    ind = j;
-                    break;
-                }
+       unordered_map<int , ll> dp;
+       ll ans = 0;
+       //dp[0] = power[0]*mpp[power[0]];
+       ll backele = 0 , prevele = 0;
+       for(auto [ele , fr] : mpp){
+            //int ele = power[i];
+            auto it = mpp.lower_bound(ele-2);
+            if(it != mpp.begin()){
+                --it;
+                backele = it->first;
             }
+            //cout<< " ele : "<< ele << " prevele  :"<< prevele << " backele : "<< backele ;
+            dp[ele] = max(dp[prevele], fr*ele + dp[backele] );
+            prevele= ele;
+            //cout<< " dp[ele] : "<< dp[ele]<< endl;
+            ans = max(ans , dp[ele]);
+       }
 
-            long long a = 0,b = 0;
-            if(ind < arr.size())
-                a = (arr[i]*m[arr[i]]) + dp[ind];
-            else
-                a = (arr[i]*m[arr[i]]);
-            if(i+1 < arr.size())
-                b = dp[i+1];
-            dp[i] = max(a,b);
-
-        }
-        // long long ans = helper(arr,0,m,dp,v);
-        return dp[0];
+       return ans;
     }
 };
