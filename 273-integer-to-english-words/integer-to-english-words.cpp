@@ -15,7 +15,7 @@ public:
         vector<string> ten = {" Ten", " Eleven", " Twelve", " Thirteen", " Fourteen", " Fifteen", " Sixteen", " Seventeen", " Eighteen", " Nineteen"};
 
         for (int i = words.size() - 1; i >= 0; i--) {
-            cout<< " words[i] : "<< words[i] << " res : "<< res << "i : "<< i << endl;
+            //cout<< " words[i] : "<< words[i] << " res : "<< res << "i : "<< i << endl;
             if (i == 0) {
                 res += ones[words[i] - '0'];
                 break;
