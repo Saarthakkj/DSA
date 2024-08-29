@@ -1,63 +1,47 @@
+#include <bitset>
+#include <vector>
+#include <set>
+#include <algorithm>
+using namespace std;
+
 class Solution {
 public:
-    static const int N = 10001;
-    static const int M = 10001;  // Size of the 2D grid
-    bitset<N * M> vis;
-    void dfs(  set<pair<int  , int>>& s, int& row , int& col){
-        vis[row*M + col] = true;
-        //cout<< "row : "<< row << " col : "<< col << "vis: " << row*M + col << endl;
-        //int ans = 1;
+    void dfs(set<pair<int, int>>& s, int row, int col, bitset<10000 * 10000>& vis, int M) {
+        vis[row * M + col] = true;
 
-        //...O(n)
-        //...to see if any connected stones
-        //...traverse row and col for this
-        for(auto temp : s){
-            if(  temp.first ==row and  !vis[row*M + temp.second]){
-                dfs( s , row , temp.second);
+        for (auto temp : s) {
+            if (temp.first == row && !vis[row * M + temp.second]) {
+                dfs(s, row, temp.second, vis, M);
             }
-            //cout<< "val : " << temp.first*M + col-1000000;
-            if( temp.second==col and !vis[temp.first*M + col]){
-                dfs( s , temp.first ,col);
+            if (temp.second == col && !vis[temp.first * M + col]) {
+                dfs(s, temp.first, col, vis, M);
             }
         }
-
-        
-        //return ans;
     }
+
     int removeStones(vector<vector<int>>& stones) {
-        int n  = -1;
-        //... finding dimensions
-        for(auto temp : stones){
-            n = max(temp[0] , max(temp[1] , n));
+        int maxRow = 0, maxCol = 0;
+        for (auto& temp : stones) {
+            maxRow = max(maxRow, temp[0]);
+            maxCol = max(maxCol, temp[1]);
         }
-        set<pair<int , int>> s ; 
-        for(auto temp : stones){
+
+        int n = max(maxRow, maxCol) + 1;  // Determine the effective grid size
+        bitset<10000 * 10000> vis;  // You can reduce the size based on `n` if it fits within 10,000 * 10,000
+        set<pair<int, int>> s;
+
+        for (auto& temp : stones) {
             s.insert({temp[0], temp[1]});
         }
 
-       // vector<vector<int>> graph(n+1 , vector<int>(n+1 , 0));
-
-        //... initialsiing the the matrix that contains 1 at stones coordinates.
-        // for(auto temp : stones){
-        //     graph[temp[0]][temp[1]] ++;
-        // }
-
-        int k =0; //... to contain how many connected stones are there
-
-        //vector<vector<int>> vis( n+1,vector<int>(n+1 ,0)); //.. getting MLE here
-
-        //... to fill the set with no. of connected stones.
-        for(auto [i,j] : s){
-            if(!vis[M*i + j] ){
-                //cout<< "i: "<< i << "j: "<< j << endl;
-                dfs( s , i , j);
+        int k = 0;
+        for (auto [i, j] : s) {
+            if (!vis[i * n + j]) {
+                dfs(s, i, j, vis, n);
                 k++;
             }
         }
-        n = stones.size();
-        // cout<< "k :"<< s.size();
-        // cout<< "n : "<< n ;
-        // cout<< " n - k : "<< n - s.size();
-        return (n - k);
+
+        return stones.size() - k;
     }
 };
