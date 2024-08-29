@@ -6,15 +6,17 @@ using namespace std;
 
 class Solution {
 public:
-    void dfs(set<pair<int, int>>& s, int row, int col, bitset<10000 * 10000>& vis, int M) {
-        vis[row * M + col] = true;
+    bitset<10000 * 10000> vis;  // Initialize with a max possible size, but will use only up to (n+1)*(n+1) later
+
+    void dfs(set<pair<int, int>>& s, int row, int col, int n) {
+        vis[row * (n + 1) + col] = true;
 
         for (auto temp : s) {
-            if (temp.first == row && !vis[row * M + temp.second]) {
-                dfs(s, row, temp.second, vis, M);
+            if (temp.first == row && !vis[row * (n + 1) + temp.second]) {
+                dfs(s, row, temp.second, n);
             }
-            if (temp.second == col && !vis[temp.first * M + col]) {
-                dfs(s, temp.first, col, vis, M);
+            if (temp.second == col && !vis[temp.first * (n + 1) + col]) {
+                dfs(s, temp.first, col, n);
             }
         }
     }
@@ -26,18 +28,17 @@ public:
             maxCol = max(maxCol, temp[1]);
         }
 
-        int n = max(maxRow, maxCol) + 1;  // Determine the effective grid size
-        bitset<10000 * 10000> vis;  // You can reduce the size based on `n` if it fits within 10,000 * 10,000
-        set<pair<int, int>> s;
+        int n = max(maxRow, maxCol);  // Determine the effective grid size (n+1)
 
+        set<pair<int, int>> s;
         for (auto& temp : stones) {
             s.insert({temp[0], temp[1]});
         }
 
         int k = 0;
         for (auto [i, j] : s) {
-            if (!vis[i * n + j]) {
-                dfs(s, i, j, vis, n);
+            if (!vis[i * (n + 1) + j]) {
+                dfs(s, i, j, n);
                 k++;
             }
         }
